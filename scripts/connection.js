@@ -32,3 +32,5 @@ function tryConnectToWS(userType) {
     //ws.send('Ping');
   }
 }
+
+export { connect };
