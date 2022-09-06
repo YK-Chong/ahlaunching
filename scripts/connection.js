@@ -1,5 +1,6 @@
-var connected = false;
-var onReceiveMessageCallback;
+let connected = false;
+let onReceiveMessageCallback;
+let ws;
 
 function connect(userType, onReceiveMessage) {
   if (!connected) {
@@ -13,17 +14,17 @@ function connect(userType, onReceiveMessage) {
 function tryConnectToWS(userType) {
   if (ws == undefined || ws.readyState === ws.CLOSED) {
     console.log("Try connect: " + new Date());
-    const wss = new WebSocket("wss://quixotic-grey-ceiling.glitch.me/");
-    wss.on("open", () => {
+    ws = new WebSocket("wss://quixotic-grey-ceiling.glitch.me/");
+    ws.addEventListener("open", () => {
       console.log("We are connected");
       ws.send("Connect:" + userType);
     });
 
-    wss.on("message", function (event) {
+    ws.addEventListener("message", function (event) {
       onReceiveMessageCallback(event.data);
     });
 
-    wss.on("error", function (event) {
+    ws.addEventListener("error", function (event) {
       console.log(event.data);
     });
   } else if (ws.readyState === ws.OPEN) {
