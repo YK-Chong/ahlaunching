@@ -31,24 +31,25 @@
     </section>
     
 </body></html>
-<script type="module">
-  import { connect } from "https://yk-chong.github.io/ahlaunching/scripts/connection.js";
-  connect("Admin", onMessageReceived);
-  function onMessageReceived(msg) {
-    if (msg.includes("ConnectedUsers:")) {
-      document.getElementById("demo").innerHTML = msg.split(":")[1];
+
+<script type="text/javascript" src="https://yk-chong.github.io/ahlaunching/scripts/connection.js"></script>
+  <script>
+    connect("Admin", onMessageReceived);
+    function onMessageReceived(msg) {
+      if (msg.includes("ConnectedUsers:")) {
+        document.getElementById("demo").innerHTML = msg.split(":")[1];
+      }
     }
-  }
 
-  function start() {
-    ws.send("ChangeState:1");
-  }
+    function start() {
+      ws.send("ChangeState:1");
+    }
 
-  function end() {
-    ws.send("ChangeState:2");
-  }
+    function end() {
+      ws.send("ChangeState:2");
+    }
 
-  function reset() {
-    ws.send("ChangeState:0");
-  }
-</script>
+    function reset() {
+      ws.send("ChangeState:0");
+    }
+  </script>
