@@ -8,6 +8,7 @@ function connect(userType, onReceiveMessage) {
     tryConnectToWS(userType);
     onReceiveMessageCallback = onReceiveMessage;
     setInterval(() => tryConnectToWS(userType), 1000);
+    setInterval(() => ws.send("Ping"), 60000);
   }
 }
 
