@@ -14,10 +14,9 @@ function connect(userType, onReceiveMessage) {
 
 function tryConnectToWS(userType) {
   if (ws == undefined || ws.readyState === ws.CLOSED) {
-    console.log("Try connect: " + new Date());
     ws = new WebSocket("wss://quixotic-grey-ceiling.glitch.me/");
     ws.addEventListener("open", () => {
-      console.log("We are connected");
+      console.log("We are connected at: " + new Date());
       ws.send("Connect:" + userType);
     });
 
@@ -29,7 +28,6 @@ function tryConnectToWS(userType) {
       console.log(event.data);
     });
   } else if (ws.readyState === ws.OPEN) {
-    console.log("Ping WS");
-    //ws.send('Ping');
+
   }
 }
