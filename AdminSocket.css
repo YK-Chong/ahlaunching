@@ -32,7 +32,7 @@
 }
 
 .u-section-1 .u-icon-2 {
-  font-size: 4.8126em;
+  font-size: 4.375em;
 }
 
 .u-section-1 .u-text-1 {
@@ -62,6 +62,10 @@
 
   .u-section-1 .u-btn-2 {
     margin-top: 32px;
+  }
+
+  .u-section-1 .u-icon-2 {
+    font-size: 3.9376em;
   }
 
   .u-section-1 .u-text-1 {
