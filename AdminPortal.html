@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html style="font-size: 16px;" lang="en">
-<head>
+<html style="font-size: 16px;" lang="en"><head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <meta name="keywords" content="No. of User :">
@@ -21,16 +20,20 @@
   <body class="u-black u-body u-xl-mode" data-lang="en">
     <section class="u-align-center u-border-3 u-border-black u-clearfix u-image u-section-1" id="sec-e2e0" data-image-width="1920" data-image-height="1080">
       <div class="u-clearfix u-sheet u-sheet-1">
-        <a onclick="start()"  class="u-border-none u-btn u-button-style u-none u-text-hover-custom-color-2 u-btn-1"><span class="u-file-icon u-icon u-icon-1">
-          <img src="images/green button.png" alt="Card Back"></span>&nbsp;
+        <a onclick="start()" class="u-border-none u-btn u-btn-round u-button-style u-hover-feature u-none u-text-hover-custom-color-3 u-btn-1"><span class="u-file-icon u-icon u-icon-1">
+           <img src="images/green button.png" alt="Card Back"></span>&nbsp;
           <img class="start-top" src="images/green hovering.png" alt="Card Front"></span>&nbsp; 
         </a>
-        <a onclick="reset()" class="u-border-none u-btn u-button-style u-none u-btn-2"><span class="u-file-icon u-icon u-icon-2">
+        <a onclick="end()" class="u-border-none u-btn u-button-style u-none u-btn-2"><span class="u-file-icon u-icon u-icon-2">
+          <img src="images/vidoebutton.png" alt=""></span>
+          <img class="end-top" src="images/video button hover.png"  alt="Card Front"></span>&nbsp; 
+        </a>
+        <a  onclick="reset()" class="u-border-none u-btn u-button-style u-none u-btn-3"><span class="u-file-icon u-icon u-icon-3">
           <img src="images/red button.png" alt=""></span>&nbsp;
           <img class="reset-top" src="images/red hovering.png"  alt="Card Front"></span>&nbsp; 
         </a>
         <h1 class="u-custom-font u-font-montserrat u-text u-text-1">No. of User​​​ : </h1>
-        <h5  id="demo" class="u-align-center u-custom-font u-font-montserrat u-text u-text-body-alt-color u-text-2">0</h5>
+        <h5 class="u-align-center u-custom-font u-font-montserrat u-text u-text-body-alt-color u-text-2">0</h5>
       </div>
     </section>
 </body></html>
@@ -49,7 +52,7 @@
     }
 
     function end() {
-      ws.send("ChangeState:2");
+      ws.send("ChangeState:3");
     }
 
     function reset() {
@@ -77,7 +80,20 @@
         margin-left: -9%;
         margin-top: -2.8%;
     }
-    .u-btn-2:hover .reset-top{
+    .end-top {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        max-width: 119%;
+        height: auto;
+        margin-left: -9%;
+        margin-top: -2.8%;
+    }
+    .u-btn-3:hover .reset-top{
+        display: inline;
+    }
+    .u-btn-2:hover .end-top{
         display: inline;
     }
     .u-btn-1:hover .start-top{
