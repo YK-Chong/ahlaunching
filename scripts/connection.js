@@ -8,7 +8,7 @@ function connect(userType, onReceiveMessage) {
     tryConnectToWS(userType);
     onReceiveMessageCallback = onReceiveMessage;
     setInterval(() => tryConnectToWS(userType), 1000);
-    setInterval(() => ws.send("Ping"), 60000);
+    //setInterval(() => ws.send("Ping"), 60000);
   }
 }
 
@@ -28,6 +28,6 @@ function tryConnectToWS(userType) {
       console.log(event.data);
     });
   } else if (ws.readyState === ws.OPEN) {
-
+    ws.send("PingFromAdmin")
   }
 }
