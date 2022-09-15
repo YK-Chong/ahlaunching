@@ -12,8 +12,8 @@ const USER_TYPE_USER = "User";
 const USER_TYPE_ADMIN = "Admin";
 const USER_TYPE_SCREEN = "Screen";
 
-let currentState = "0";
-let connectedClients = [];
+var currentState = "0";
+var connectedClients = [];
 
 function currentStateMsg() {
     return "CurrentState:" + currentState;
@@ -21,7 +21,7 @@ function currentStateMsg() {
 
 function changeState(state) {
     currentState = state;
-    connectedClients.forEach((client) => client.Socket.send(currentStateMsg()));
+    wsServer.clients.forEach((client) => client.send(currentStateMsg()));
 }
 
 function sendAdminNumOfConnectedClients() {
@@ -70,17 +70,17 @@ wsServer.on("connection", function (socket) {
 
     // Attach some behavior to the incoming socket
     socket.on("message", function (msg) {
-        console.log("Received message from client: " + msg);
+        if (!msg.includes("Ping") && !msg.includes("GetState"))
+            console.log("Received message from client: " + msg);
         if (msg.includes("Connect:")) {
             connectedClients.push({ Socket: socket, Type: msg.split(":")[1] });
             socket.send(currentStateMsg());
-            // console.log(
-            //   "MyClient: " +
-            //     connectedClients.length +
-            //     ", WsClient: " +
-            //     wsServer.clients.size
-            // );
-            //sendAdminNumOfConnectedClients();
+            console.log(
+                "MyClient: " +
+                connectedClients.length +
+                ", WsClient: " +
+                wsServer.clients.size
+            );
             sendNumOfConnectedClients();
         } else if (msg.includes("ChangeState:")) {
             changeState(msg.split(":")[1]);
@@ -94,7 +94,8 @@ wsServer.on("connection", function (socket) {
 
     socket.on("close", function () {
         let client = connectedClients.findIndex((c) => c.Socket === socket);
-        connectedClients.splice(client, 1);
+        if (client != undefined && client != null)
+            connectedClients.splice(client, 1);
         console.log("Client disconnected");
         console.log(
             "MyClient: " +
